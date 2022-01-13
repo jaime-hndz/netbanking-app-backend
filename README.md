@@ -1,3 +1,3 @@
 # netbanking-app-backend
 
-Its the backend side of netbanking-app
+Is the backend side of netbanking-app
