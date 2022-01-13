@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="internet_bankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CEDULA" Type="varchar" MaxLength="10" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="255" />
+          <Property Name="CORREO" Type="varchar" MaxLength="255" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="255" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="255" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="ESTATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+          <Property Name="BALANCE" Type="float" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="ESTATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="CUOTA">
+          <Key>
+            <PropertyRef Name="ID_CUOTA" />
+          </Key>
+          <Property Name="ID_CUOTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PRESTAMO" Type="varchar" MaxLength="255" />
+          <Property Name="MONTO" Type="float" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PRESTAMO">
+          <Key>
+            <PropertyRef Name="ID_PRESTAMO" />
+          </Key>
+          <Property Name="ID_PRESTAMO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+          <Property Name="BALANCE" Type="float" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="ESTATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="TARJETA">
+          <Key>
+            <PropertyRef Name="ID_TARJETA" />
+          </Key>
+          <Property Name="ID_TARJETA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+          <Property Name="BALANCE" Type="float" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="ESTATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TRANSACCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CUENTA" Type="varchar" MaxLength="255" />
+          <Property Name="TIPO" Type="varchar" MaxLength="255" />
+          <Property Name="MONTO" Type="float" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="255" />
+          <Property Name="CONTRA" Type="varchar" MaxLength="255" />
+          <Property Name="ID_CLIENTE" Type="int" />
+          <Property Name="ADMINISTRA" Type="bit" />
+          <Property Name="FECHA_CREACION" Type="datetime" />
+          <Property Name="ESTATUS" Type="bit" />
+        </EntityType>
+        <Function Name="CUENTAS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LOG_IN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PRESTAMOS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TARJETAS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TRANSACCIONES_TIEMPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="f1" Type="datetime" Mode="In" />
+          <Parameter Name="f2" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UPDATE_SAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="monto" Type="float" Mode="In" />
+        </Function>
+        <EntityContainer Name="internet_bankingModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUOTA" EntityType="Self.CUOTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRESTAMO" EntityType="Self.PRESTAMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TARJETA" EntityType="Self.TARJETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="internet_bankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CEDULA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <Property Name="BALANCE" Type="Double" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CUOTA">
+          <Key>
+            <PropertyRef Name="ID_CUOTA" />
+          </Key>
+          <Property Name="ID_CUOTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PRESTAMO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MONTO" Type="Double" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PRESTAMO">
+          <Key>
+            <PropertyRef Name="ID_PRESTAMO" />
+          </Key>
+          <Property Name="ID_PRESTAMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <Property Name="BALANCE" Type="Double" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TARJETA">
+          <Key>
+            <PropertyRef Name="ID_TARJETA" />
+          </Key>
+          <Property Name="ID_TARJETA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <Property Name="BALANCE" Type="Double" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TRANSACCION">
+          <Key>
+            <PropertyRef Name="ID_TRANSACCION" />
+          </Key>
+          <Property Name="ID_TRANSACCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CUENTA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MONTO" Type="Double" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <Property Name="ADMINISTRA" Type="Boolean" />
+          <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ESTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="internet_bankingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTEs" EntityType="Self.CLIENTE" />
+          <EntitySet Name="CUENTAs" EntityType="Self.CUENTA" />
+          <EntitySet Name="CUOTAs" EntityType="Self.CUOTA" />
+          <EntitySet Name="PRESTAMOes" EntityType="Self.PRESTAMO" />
+          <EntitySet Name="TARJETAs" EntityType="Self.TARJETA" />
+          <EntitySet Name="TRANSACCIONs" EntityType="Self.TRANSACCION" />
+          <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+          <FunctionImport Name="CUENTAS_CLIENTE" ReturnType="Collection(internet_bankingModel.CUENTAS_CLIENTE_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PRESTAMOS_CLIENTE" ReturnType="Collection(internet_bankingModel.PRESTAMOS_CLIENTE_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TARJETAS_CLIENTE" ReturnType="Collection(internet_bankingModel.TARJETAS_CLIENTE_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TRANSACCIONES_TIEMPO" ReturnType="Collection(internet_bankingModel.TRANSACCIONES_TIEMPO_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="f1" Mode="In" Type="DateTime" />
+            <Parameter Name="f2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UPDATE_SAL">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="monto" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="LOG_IN" ReturnType="Collection(internet_bankingModel.LOG_IN_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CUENTAS_CLIENTE_Result">
+          <Property Type="Int32" Name="ID_CUENTA" Nullable="false" />
+          <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+          <Property Type="Double" Name="BALANCE" Nullable="true" />
+          <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PRESTAMOS_CLIENTE_Result">
+          <Property Type="Int32" Name="ID_PRESTAMO" Nullable="false" />
+          <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+          <Property Type="Double" Name="BALANCE" Nullable="true" />
+          <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TARJETAS_CLIENTE_Result">
+          <Property Type="Int32" Name="ID_TARJETA" Nullable="false" />
+          <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+          <Property Type="Double" Name="BALANCE" Nullable="true" />
+          <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TRANSACCIONES_TIEMPO_Result">
+          <Property Type="Int32" Name="ID_TRANSACCION" Nullable="false" />
+          <Property Type="String" Name="ID_CUENTA" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TIPO" Nullable="true" MaxLength="255" />
+          <Property Type="Double" Name="MONTO" Nullable="true" />
+          <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="LOG_IN_Result">
+          <Property Type="Int32" Name="ID_USUARIO" Nullable="false" />
+          <Property Type="String" Name="USUARIO" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CONTRA" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+          <Property Type="Boolean" Name="ADMINISTRA" Nullable="true" />
+          <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="internet_bankingModelStoreContainer" CdmEntityContainer="internet_bankingEntities">
+          <EntitySetMapping Name="CLIENTEs">
+            <EntityTypeMapping TypeName="internet_bankingModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTAs">
+            <EntityTypeMapping TypeName="internet_bankingModel.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUOTAs">
+            <EntityTypeMapping TypeName="internet_bankingModel.CUOTA">
+              <MappingFragment StoreEntitySet="CUOTA">
+                <ScalarProperty Name="ID_CUOTA" ColumnName="ID_CUOTA" />
+                <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTAMOes">
+            <EntityTypeMapping TypeName="internet_bankingModel.PRESTAMO">
+              <MappingFragment StoreEntitySet="PRESTAMO">
+                <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TARJETAs">
+            <EntityTypeMapping TypeName="internet_bankingModel.TARJETA">
+              <MappingFragment StoreEntitySet="TARJETA">
+                <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSACCIONs">
+            <EntityTypeMapping TypeName="internet_bankingModel.TRANSACCION">
+              <MappingFragment StoreEntitySet="TRANSACCION">
+                <ScalarProperty Name="ID_TRANSACCION" ColumnName="ID_TRANSACCION" />
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOs">
+            <EntityTypeMapping TypeName="internet_bankingModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
+                <ScalarProperty Name="CONTRA" ColumnName="CONTRA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ADMINISTRA" ColumnName="ADMINISTRA" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CUENTAS_CLIENTE" FunctionName="internet_bankingModel.Store.CUENTAS_CLIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="internet_bankingModel.CUENTAS_CLIENTE_Result">
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PRESTAMOS_CLIENTE" FunctionName="internet_bankingModel.Store.PRESTAMOS_CLIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="internet_bankingModel.PRESTAMOS_CLIENTE_Result">
+                <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TARJETAS_CLIENTE" FunctionName="internet_bankingModel.Store.TARJETAS_CLIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="internet_bankingModel.TARJETAS_CLIENTE_Result">
+                <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TRANSACCIONES_TIEMPO" FunctionName="internet_bankingModel.Store.TRANSACCIONES_TIEMPO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="internet_bankingModel.TRANSACCIONES_TIEMPO_Result">
+                <ScalarProperty Name="ID_TRANSACCION" ColumnName="ID_TRANSACCION" />
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UPDATE_SAL" FunctionName="internet_bankingModel.Store.UPDATE_SAL" />
+          <FunctionImportMapping FunctionImportName="LOG_IN" FunctionName="internet_bankingModel.Store.LOG_IN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="internet_bankingModel.LOG_IN_Result">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="CONTRA" ColumnName="CONTRA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ADMINISTRA" ColumnName="ADMINISTRA" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

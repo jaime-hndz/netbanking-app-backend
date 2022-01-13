@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="internet_bankingModelStoreContainer" CdmEntityContainer="internet_bankingEntities">
+    <EntitySetMapping Name="CLIENTEs">
+      <EntityTypeMapping TypeName="internet_bankingModel.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTE">
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUENTAs">
+      <EntityTypeMapping TypeName="internet_bankingModel.CUENTA">
+        <MappingFragment StoreEntitySet="CUENTA">
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUOTAs">
+      <EntityTypeMapping TypeName="internet_bankingModel.CUOTA">
+        <MappingFragment StoreEntitySet="CUOTA">
+          <ScalarProperty Name="ID_CUOTA" ColumnName="ID_CUOTA" />
+          <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESTAMOes">
+      <EntityTypeMapping TypeName="internet_bankingModel.PRESTAMO">
+        <MappingFragment StoreEntitySet="PRESTAMO">
+          <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TARJETAs">
+      <EntityTypeMapping TypeName="internet_bankingModel.TARJETA">
+        <MappingFragment StoreEntitySet="TARJETA">
+          <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSACCIONs">
+      <EntityTypeMapping TypeName="internet_bankingModel.TRANSACCION">
+        <MappingFragment StoreEntitySet="TRANSACCION">
+          <ScalarProperty Name="ID_TRANSACCION" ColumnName="ID_TRANSACCION" />
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOs">
+      <EntityTypeMapping TypeName="internet_bankingModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="USUARIO1" ColumnName="USUARIO" />
+          <ScalarProperty Name="CONTRA" ColumnName="CONTRA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="ADMINISTRA" ColumnName="ADMINISTRA" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CUENTAS_CLIENTE" FunctionName="internet_bankingModel.Store.CUENTAS_CLIENTE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="internet_bankingModel.CUENTAS_CLIENTE_Result">
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PRESTAMOS_CLIENTE" FunctionName="internet_bankingModel.Store.PRESTAMOS_CLIENTE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="internet_bankingModel.PRESTAMOS_CLIENTE_Result">
+          <ScalarProperty Name="ID_PRESTAMO" ColumnName="ID_PRESTAMO" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TARJETAS_CLIENTE" FunctionName="internet_bankingModel.Store.TARJETAS_CLIENTE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="internet_bankingModel.TARJETAS_CLIENTE_Result">
+          <ScalarProperty Name="ID_TARJETA" ColumnName="ID_TARJETA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TRANSACCIONES_TIEMPO" FunctionName="internet_bankingModel.Store.TRANSACCIONES_TIEMPO">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="internet_bankingModel.TRANSACCIONES_TIEMPO_Result">
+          <ScalarProperty Name="ID_TRANSACCION" ColumnName="ID_TRANSACCION" />
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+          <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UPDATE_SAL" FunctionName="internet_bankingModel.Store.UPDATE_SAL" />
+    <FunctionImportMapping FunctionImportName="LOG_IN" FunctionName="internet_bankingModel.Store.LOG_IN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="internet_bankingModel.LOG_IN_Result">
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="CONTRA" ColumnName="CONTRA" />
+          <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+          <ScalarProperty Name="ADMINISTRA" ColumnName="ADMINISTRA" />
+          <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+          <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

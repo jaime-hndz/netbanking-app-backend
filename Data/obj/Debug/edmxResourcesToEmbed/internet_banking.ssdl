@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="internet_bankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="ID_CLIENTE" />
+    </Key>
+    <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CEDULA" Type="varchar" MaxLength="10" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="255" />
+    <Property Name="APELLIDO" Type="varchar" MaxLength="255" />
+    <Property Name="CORREO" Type="varchar" MaxLength="255" />
+    <Property Name="TELEFONO" Type="varchar" MaxLength="255" />
+    <Property Name="DIRECCION" Type="varchar" MaxLength="255" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+    <Property Name="ESTATUS" Type="bit" />
+  </EntityType>
+  <EntityType Name="CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLIENTE" Type="int" />
+    <Property Name="BALANCE" Type="float" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+    <Property Name="ESTATUS" Type="bit" />
+  </EntityType>
+  <EntityType Name="CUOTA">
+    <Key>
+      <PropertyRef Name="ID_CUOTA" />
+    </Key>
+    <Property Name="ID_CUOTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_PRESTAMO" Type="varchar" MaxLength="255" />
+    <Property Name="MONTO" Type="float" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID_PRESTAMO" />
+    </Key>
+    <Property Name="ID_PRESTAMO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLIENTE" Type="int" />
+    <Property Name="BALANCE" Type="float" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+    <Property Name="ESTATUS" Type="bit" />
+  </EntityType>
+  <EntityType Name="TARJETA">
+    <Key>
+      <PropertyRef Name="ID_TARJETA" />
+    </Key>
+    <Property Name="ID_TARJETA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLIENTE" Type="int" />
+    <Property Name="BALANCE" Type="float" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+    <Property Name="ESTATUS" Type="bit" />
+  </EntityType>
+  <EntityType Name="TRANSACCION">
+    <Key>
+      <PropertyRef Name="ID_TRANSACCION" />
+    </Key>
+    <Property Name="ID_TRANSACCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="255" />
+    <Property Name="TIPO" Type="varchar" MaxLength="255" />
+    <Property Name="MONTO" Type="float" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="255" />
+    <Property Name="CONTRA" Type="varchar" MaxLength="255" />
+    <Property Name="ID_CLIENTE" Type="int" />
+    <Property Name="ADMINISTRA" Type="bit" />
+    <Property Name="FECHA_CREACION" Type="datetime" />
+    <Property Name="ESTATUS" Type="bit" />
+  </EntityType>
+  <Function Name="CUENTAS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LOG_IN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="PRESTAMOS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TARJETAS_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TRANSACCIONES_TIEMPO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="f1" Type="datetime" Mode="In" />
+    <Parameter Name="f2" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="UPDATE_SAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="monto" Type="float" Mode="In" />
+  </Function>
+  <EntityContainer Name="internet_bankingModelStoreContainer">
+    <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUOTA" EntityType="Self.CUOTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRESTAMO" EntityType="Self.PRESTAMO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TARJETA" EntityType="Self.TARJETA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRANSACCION" EntityType="Self.TRANSACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

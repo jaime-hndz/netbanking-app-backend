@@ -1,0 +1,14 @@
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Data.dll.config
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Data.dll
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Data.pdb
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Entity.dll
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\EntityFramework.dll
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Entity.pdb
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\Entity.dll.config
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\EntityFramework.xml
+C:\Users\J\source\repos\netbanking\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\J\source\repos\netbanking\Data\obj\Debug\Data.csproj.AssemblyReference.cache
+C:\Users\J\source\repos\netbanking\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+C:\Users\J\source\repos\netbanking\Data\obj\Debug\Data.dll
+C:\Users\J\source\repos\netbanking\Data\obj\Debug\Data.pdb

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="internet_bankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CLIENTE">
+    <Key>
+      <PropertyRef Name="ID_CLIENTE" />
+    </Key>
+    <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CEDULA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+    <Property Name="ESTATUS" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLIENTE" Type="Int32" />
+    <Property Name="BALANCE" Type="Double" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+    <Property Name="ESTATUS" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="CUOTA">
+    <Key>
+      <PropertyRef Name="ID_CUOTA" />
+    </Key>
+    <Property Name="ID_CUOTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PRESTAMO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MONTO" Type="Double" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="PRESTAMO">
+    <Key>
+      <PropertyRef Name="ID_PRESTAMO" />
+    </Key>
+    <Property Name="ID_PRESTAMO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLIENTE" Type="Int32" />
+    <Property Name="BALANCE" Type="Double" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+    <Property Name="ESTATUS" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TARJETA">
+    <Key>
+      <PropertyRef Name="ID_TARJETA" />
+    </Key>
+    <Property Name="ID_TARJETA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLIENTE" Type="Int32" />
+    <Property Name="BALANCE" Type="Double" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+    <Property Name="ESTATUS" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TRANSACCION">
+    <Key>
+      <PropertyRef Name="ID_TRANSACCION" />
+    </Key>
+    <Property Name="ID_TRANSACCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUENTA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TIPO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MONTO" Type="Double" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USUARIO1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CONTRA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CLIENTE" Type="Int32" />
+    <Property Name="ADMINISTRA" Type="Boolean" />
+    <Property Name="FECHA_CREACION" Type="DateTime" Precision="3" />
+    <Property Name="ESTATUS" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="internet_bankingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CLIENTEs" EntityType="Self.CLIENTE" />
+    <EntitySet Name="CUENTAs" EntityType="Self.CUENTA" />
+    <EntitySet Name="CUOTAs" EntityType="Self.CUOTA" />
+    <EntitySet Name="PRESTAMOes" EntityType="Self.PRESTAMO" />
+    <EntitySet Name="TARJETAs" EntityType="Self.TARJETA" />
+    <EntitySet Name="TRANSACCIONs" EntityType="Self.TRANSACCION" />
+    <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+    <FunctionImport Name="CUENTAS_CLIENTE" ReturnType="Collection(internet_bankingModel.CUENTAS_CLIENTE_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PRESTAMOS_CLIENTE" ReturnType="Collection(internet_bankingModel.PRESTAMOS_CLIENTE_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="TARJETAS_CLIENTE" ReturnType="Collection(internet_bankingModel.TARJETAS_CLIENTE_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="TRANSACCIONES_TIEMPO" ReturnType="Collection(internet_bankingModel.TRANSACCIONES_TIEMPO_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="f1" Mode="In" Type="DateTime" />
+      <Parameter Name="f2" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="UPDATE_SAL">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="monto" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="LOG_IN" ReturnType="Collection(internet_bankingModel.LOG_IN_Result)">
+      <Parameter Name="user" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="CUENTAS_CLIENTE_Result">
+    <Property Type="Int32" Name="ID_CUENTA" Nullable="false" />
+    <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+    <Property Type="Double" Name="BALANCE" Nullable="true" />
+    <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="PRESTAMOS_CLIENTE_Result">
+    <Property Type="Int32" Name="ID_PRESTAMO" Nullable="false" />
+    <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+    <Property Type="Double" Name="BALANCE" Nullable="true" />
+    <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="TARJETAS_CLIENTE_Result">
+    <Property Type="Int32" Name="ID_TARJETA" Nullable="false" />
+    <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+    <Property Type="Double" Name="BALANCE" Nullable="true" />
+    <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="TRANSACCIONES_TIEMPO_Result">
+    <Property Type="Int32" Name="ID_TRANSACCION" Nullable="false" />
+    <Property Type="String" Name="ID_CUENTA" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TIPO" Nullable="true" MaxLength="255" />
+    <Property Type="Double" Name="MONTO" Nullable="true" />
+    <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="LOG_IN_Result">
+    <Property Type="Int32" Name="ID_USUARIO" Nullable="false" />
+    <Property Type="String" Name="USUARIO" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CONTRA" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="ID_CLIENTE" Nullable="true" />
+    <Property Type="Boolean" Name="ADMINISTRA" Nullable="true" />
+    <Property Type="DateTime" Name="FECHA_CREACION" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="ESTATUS" Nullable="true" />
+  </ComplexType>
+</Schema>
